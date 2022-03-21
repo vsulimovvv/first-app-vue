@@ -3,8 +3,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: "AppButton",
   props: {
@@ -14,6 +12,8 @@ export default {
       required: true,
     },
   },
+
+  emits: ["onButtonClick"],
 };
 </script>
 
