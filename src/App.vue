@@ -2,7 +2,8 @@
   <!-- <MainPage /> -->
   <!-- <Login /> -->
   <!-- <Posts /> -->
-  <CryptocurrencyPage />
+  <!-- <CryptocurrencyPage /> -->
+  <ModalPage />
 </template>
 
 <script>
@@ -10,10 +11,11 @@ import MainPage from "./pages/MainPage";
 import Login from "./pages/Login";
 import Posts from "./pages/Posts";
 import CryptocurrencyPage from "./pages/CryptocurrencyPage";
+import ModalPage from "./pages/ModalPage";
 
 export default {
   name: "App",
-  components: { MainPage, Login, Posts, CryptocurrencyPage },
+  components: { MainPage, Login, Posts, CryptocurrencyPage, ModalPage },
 };
 </script>
 
@@ -33,9 +35,12 @@ body {
 button {
   margin: 0;
   padding: 0;
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
-  margin: 0; /* 2 */
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  background: transparent;
+  border: none;
 }
 </style>

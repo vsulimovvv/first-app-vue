@@ -22,7 +22,6 @@
         Общая стоимость: <strong>{{ amount }} $</strong>
       </p>
 
-      <!-- <button class="head__btn btn" type="button" @click="addNewCoinCard">Добавить</button> -->
     </div>
     <hr />
 
@@ -40,10 +39,10 @@
           По имени Z-A
         </button>
         <button class="sort__btn btn" type="button" @click="sortCardsByPrice('increase')">
-          По возрастанию
+          По возрастанию цены
         </button>
         <button class="sort__btn btn" type="button" @click="sortCardsByPrice('decrease')">
-          По убыванию
+          По убыванию цены
         </button>
       </div>
 
@@ -59,20 +58,12 @@
 
     <hr />
 
-    <div class="pagination">
-      <ul class="pagination__list">
-        <li class="pagination__item" v-for="(item, idx) in paginationCalc" :key="idx">
-          <button
-            class="pagination__link"
-            :class="{ 'pagination__link--active': currentPage === item }"
-            type="button"
-            @click="changePage(item)"
-          >
-            {{ item }}
-          </button>
-        </li>
-      </ul>
-    </div>
+    <Pagination
+      :pagination="currencyListLength"
+      :currentPage="currentPage"
+      :amountCards="amountCards"
+      @changePage="changePage"
+    />
 
     <hr />
 
@@ -90,8 +81,11 @@
 </template>
 
 <script>
+import Pagination from "@/components/Pagination/Pagination";
+
 export default {
   name: "CryptocurrencyPage",
+  components: { Pagination },
 
   data() {
     return {
@@ -220,11 +214,9 @@ export default {
       }
     },
 
-    changePage(cardId) {
-      this.currentPage = cardId;
+    changePage(idx) {
+      this.currentPage = idx;
     },
-
-    // changeCardsOnPage() {},
   },
 
   computed: {
@@ -236,12 +228,12 @@ export default {
       return Math.round(amount);
     },
 
-    pagination() {
-      return this.currencyList.slice(this.startIndex, this.endIndex);
+    currencyListLength() {
+      return this.currencyList.length;
     },
 
-    paginationCalc() {
-      return Math.round(this.currencyList.length / this.amountCards);
+    pagination() {
+      return this.currencyList.slice(this.startIndex, this.endIndex);
     },
 
     startIndex() {
@@ -497,49 +489,6 @@ input {
 
     input {
       width: 100%;
-    }
-  }
-}
-
-.pagination {
-  padding: 15px 0;
-
-  @media screen and (max-width: 769px) {
-    padding: 10px 0;
-  }
-
-  &__list {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  &__link {
-    display: block;
-    text-decoration: none;
-    border: 1px solid #563d7c;
-    background-color: #fff;
-    color: #563d7c;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 5px;
-    transition: 150ms ease, transform 0s;
-    cursor: pointer;
-
-    &:hover,
-    &--active {
-      background-color: #563d7c;
-      border-color: transparent;
-      color: #fff;
-    }
-
-    &:active {
-      transform: scale(0.96);
     }
   }
 }
